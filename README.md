@@ -2,9 +2,18 @@
 
 [![Frame0 MCP Video Example](https://github.com/niklauslee/frame0-mcp-server/raw/main/thumbnail.png)](https://frame0.app/videos/frame0-mcp-example.mp4)
 
-# Frame0 MCP Server
+# Muzika Frame0 MCP Server
 
-[Frame0](https://frame0.app/) is a Balsamiq-alternative wireframe tool for modern apps. **Frame0 MCP Server** allows you for creating and modifying wireframes in Frame0 by prompting.
+[Frame0](https://frame0.app/) is a Balsamiq-alternative wireframe tool for modern apps. **Muzika Frame0 MCP Server** is a customized version that allows you to create and modify wireframes in Frame0 specifically for the Muzika music analytics project.
+
+## About Muzika Project
+
+Muzika is a comprehensive music band and artist data management system designed to capture and analyze complex relationships in the music industry:
+
+- **Artist career paths**: Track artists moving between bands
+- **Temporal relationships**: When artists were in which bands  
+- **Cross-band connections**: Find artists who played together
+- **Career timeline analysis**: Complete artist journey visualization
 
 ## Setup
 
@@ -17,9 +26,9 @@ Setup for Claude Desktop in `claude_desktop_config.json` as below:
 ```json
 {
   "mcpServers": {
-    "frame0-mcp-server": {
+    "muzika-frame0-mcp-server": {
       "command": "npx",
-      "args": ["-y", "frame0-mcp-server"]
+      "args": ["-y", "muzika-frame0-mcp-server"]
     }
   }
 }
@@ -27,18 +36,19 @@ Setup for Claude Desktop in `claude_desktop_config.json` as below:
 
 You can use `--api-port=<port>` optional parameter to use another port number for Frame0's API server.
 
-## Example Prompts
+## Music Analytics Wireframe Examples
 
-- _“Create a login screen for Phone in Frame0”_
-- _“Create a Instagram home screen for Phone in Frame0”_
-- _“Create a Netflix home screen for TV in Frame0”_
-- _“Change the color of the Login button”_
-- _“Remove the Twitter social login”_
-- _“Replace the emojis by icons”_
-- _“Set a link from the google login button to the Google website”_
+- _"Create a music analytics dashboard for Desktop in Frame0"_
+- _"Create an artist career timeline visualization for Tablet in Frame0"_
+- _"Create a band member relationship diagram for Desktop in Frame0"_
+- _"Create a music project timeline for Phone in Frame0"_
+- _"Add a cross-band connection visualization"_
+- _"Create a music genre analytics chart"_
+- _"Design a music industry network graph"_
 
-## Tools
+## Available Tools
 
+### Basic Frame0 Tools
 - `create_frame`
 - `create_rectangle`
 - `create_ellipse`
@@ -68,7 +78,14 @@ You can use `--api-port=<port>` optional parameter to use another port number fo
 - `get_all_pages`
 - `export_page_as_image`
 
-## Dev
+### Music-Specific Tools (Coming Soon)
+- `create_music_dashboard`
+- `create_artist_timeline`
+- `create_band_relationship_diagram`
+- `create_music_analytics_chart`
+- `create_cross_band_connections`
+
+## Development
 
 1. Clone this repository.
 2. Build with `npm run build`.
@@ -78,10 +95,28 @@ You can use `--api-port=<port>` optional parameter to use another port number fo
 ```json
 {
   "mcpServers": {
-    "frame0-mcp-server": {
+    "muzika-frame0-mcp-server": {
       "command": "node",
-      "args": ["<full-path-to>/frame0-mcp-server/build/index.js"]
+      "args": ["<full-path-to>/muzika-frame0-mcp-server/build/index.js"]
     }
   }
 }
 ```
+
+## Music Analytics Use Cases
+
+This MCP server is specifically designed to help create wireframes for:
+
+1. **Artist Career Dashboards**: Visualize artist career paths and transitions
+2. **Band Relationship Networks**: Show connections between bands and artists
+3. **Temporal Analytics**: Timeline-based visualizations of music industry data
+4. **Cross-Band Analysis**: Identify artists who played in multiple bands
+5. **Music Project Tracking**: Album and project timeline visualizations
+
+## Contributing
+
+This is a fork of the original [frame0-mcp-server](https://github.com/niklauslee/frame0-mcp-server) by [@niklauslee](https://github.com/niklauslee), customized for the Muzika music analytics project.
+
+## License
+
+MIT License - see LICENSE file for details.

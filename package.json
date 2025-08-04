@@ -1,10 +1,10 @@
 {
-  "name": "frame0-mcp-server",
-  "version": "0.11.3",
+  "name": "muzika-frame0-mcp-server",
+  "version": "0.1.0",
   "type": "module",
-  "description": "",
+  "description": "Frame0 MCP Server customized for Muzika music analytics project - creating wireframes for music band and artist data management system",
   "bin": {
-    "frame0-mcp-server": "build/index.js"
+    "muzika-frame0-mcp-server": "build/index.js"
   },
   "scripts": {
     "start": "tsx src/index.ts",
@@ -18,15 +18,15 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/niklauslee/frame0-mcp-server.git"
+    "url": "git+https://github.com/aviram26/frame0-mcp-server.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["mcp", "frame0", "music", "analytics", "wireframes", "muzika"],
+  "author": "Muzika Project Team",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/niklauslee/frame0-mcp-server/issues"
+    "url": "https://github.com/aviram26/frame0-mcp-server/issues"
   },
-  "homepage": "https://github.com/niklauslee/frame0-mcp-server#readme",
+  "homepage": "https://github.com/aviram26/frame0-mcp-server#readme",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.1",
     "node-fetch": "^3.3.2",
