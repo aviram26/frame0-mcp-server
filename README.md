@@ -82,6 +82,7 @@ You can use `--api-port=<port>` optional parameter to use another port number fo
 - `save_file`
 - `save_file_as`
 - `save_file_to_path`
+- `save_file_to_muzika_wireframes`
 
 ### Music-Specific Tools (Coming Soon)
 

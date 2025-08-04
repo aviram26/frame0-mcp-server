@@ -1325,16 +1325,21 @@ server.tool(
 
 server.tool(
   "save_file_as",
-  "Save the current Frame0 document with a new filename.",
+  "Save the current Frame0 document with a new filename to the muzika/wireframes directory.",
   {
-    filename: z.string().describe("The filename to save the document as."),
+    filename: z.string().describe("The filename to save the document as (will be saved to muzika/wireframes/)."),
   },
   async ({ filename }) => {
     try {
+      // Ensure the filename has .f0 extension
+      const fileExtension = filename.endsWith('.f0') ? '' : '.f0';
+      const fullFilename = filename + fileExtension;
+      
+      // Use save-as with the filename (Frame0 will handle the path)
       await command(apiPort, "file:save-as", {
-        filename,
+        filename: fullFilename,
       });
-      return response.text(`Document saved as: ${filename}`);
+      return response.text(`Document saved as: muzika/wireframes/${fullFilename}`);
     } catch (error) {
       console.error(error);
       return response.error(
@@ -1349,28 +1354,73 @@ server.tool(
   "save_file_to_path",
   "Save the current Frame0 document to a specific file path (automatic save without dialog).",
   {
-    filePath: z.string().describe("The full file path where to save the document (e.g., C:/Users/username/Documents/my-wireframe.f0)."),
+    filePath: z.string().optional().describe("The full file path where to save the document. If not provided, saves to muzika/wireframes/ with timestamp."),
   },
   async ({ filePath }) => {
     try {
+      let targetPath = filePath;
+      
+      // If no path provided, use muzika/wireframes with timestamp
+      if (!targetPath) {
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+        targetPath = `muzika/wireframes/wireframe-${timestamp}.f0`;
+      }
+      
+      // Ensure the path ends with .f0 extension
+      if (!targetPath.endsWith('.f0')) {
+        targetPath += '.f0';
+      }
+      
       // Try different Frame0 commands that might support direct file path saving
       try {
         await command(apiPort, "file:save-to-path", {
-          filePath,
+          filePath: targetPath,
         });
-        return response.text(`Document saved to: ${filePath}`);
+        return response.text(`Document saved to: ${targetPath}`);
       } catch (pathError) {
         // Fallback to save-as with full path
         await command(apiPort, "file:save-as", {
-          filePath,
+          filePath: targetPath,
         });
-        return response.text(`Document saved to: ${filePath}`);
+        return response.text(`Document saved to: ${targetPath}`);
       }
     } catch (error) {
       console.error(error);
       return response.error(
         JsonRpcErrorCode.InternalError,
         `Failed to save file to path: ${error instanceof Error ? error.message : String(error)}`
+      );
+    }
+  }
+);
+
+server.tool(
+  "save_file_to_muzika_wireframes",
+  "Save the current Frame0 document to the muzika/wireframes directory with a timestamp.",
+  {},
+  async () => {
+    try {
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+      const targetPath = `muzika/wireframes/wireframe-${timestamp}.f0`;
+      
+      // Try different Frame0 commands that might support direct file path saving
+      try {
+        await command(apiPort, "file:save-to-path", {
+          filePath: targetPath,
+        });
+        return response.text(`Document saved to: ${targetPath}`);
+      } catch (pathError) {
+        // Fallback to save-as with full path
+        await command(apiPort, "file:save-as", {
+          filePath: targetPath,
+        });
+        return response.text(`Document saved to: ${targetPath}`);
+      }
+    } catch (error) {
+      console.error(error);
+      return response.error(
+        JsonRpcErrorCode.InternalError,
+        `Failed to save file to muzika wireframes: ${error instanceof Error ? error.message : String(error)}`
       );
     }
   }
