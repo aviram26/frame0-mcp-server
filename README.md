@@ -84,6 +84,13 @@ You can use `--api-port=<port>` optional parameter to use another port number fo
 - `save_file_to_path`
 - `save_file_to_muzika_wireframes`
 
+### Save Commands Usage
+
+- **`save_file`**: Saves the current document to its existing location (use when modifying existing files)
+- **`save_file_as`**: Saves with a new filename to muzika/wireframes directory
+- **`save_file_to_path`**: Saves to a specific path (optional path parameter)
+- **`save_file_to_muzika_wireframes`**: Creates a new timestamped file in muzika/wireframes (use for new wireframes)
+
 ### Music-Specific Tools (Coming Soon)
 
 - `create_music_dashboard`
