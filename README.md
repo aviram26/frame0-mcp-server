@@ -77,6 +77,8 @@ You can use `--api-port=<port>` optional parameter to use another port number fo
 - `get_page`
 - `get_all_pages`
 - `export_page_as_image`
+- `save_file`
+- `save_file_as`
 
 ### Music-Specific Tools (Coming Soon)
 - `create_music_dashboard`

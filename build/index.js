@@ -934,6 +934,30 @@ server.tool("export_page_as_image", "Export page as image in Frame0.", {
         return response.error(JsonRpcErrorCode.InternalError, `Failed to export page as image: ${error instanceof Error ? error.message : String(error)}`);
     }
 });
+server.tool("save_file", "Save the current Frame0 document.", {}, async () => {
+    try {
+        await command(apiPort, "file:save", {});
+        return response.text("Document saved successfully");
+    }
+    catch (error) {
+        console.error(error);
+        return response.error(JsonRpcErrorCode.InternalError, `Failed to save file: ${error instanceof Error ? error.message : String(error)}`);
+    }
+});
+server.tool("save_file_as", "Save the current Frame0 document with a new filename.", {
+    filename: z.string().describe("The filename to save the document as."),
+}, async ({ filename }) => {
+    try {
+        await command(apiPort, "file:save-as", {
+            filename,
+        });
+        return response.text(`Document saved as: ${filename}`);
+    }
+    catch (error) {
+        console.error(error);
+        return response.error(JsonRpcErrorCode.InternalError, `Failed to save file as: ${error instanceof Error ? error.message : String(error)}`);
+    }
+});
 async function main() {
     const transport = new StdioServerTransport();
     await server.connect(transport);
