@@ -1345,6 +1345,37 @@ server.tool(
   }
 );
 
+server.tool(
+  "save_file_to_path",
+  "Save the current Frame0 document to a specific file path (automatic save without dialog).",
+  {
+    filePath: z.string().describe("The full file path where to save the document (e.g., C:/Users/username/Documents/my-wireframe.f0)."),
+  },
+  async ({ filePath }) => {
+    try {
+      // Try different Frame0 commands that might support direct file path saving
+      try {
+        await command(apiPort, "file:save-to-path", {
+          filePath,
+        });
+        return response.text(`Document saved to: ${filePath}`);
+      } catch (pathError) {
+        // Fallback to save-as with full path
+        await command(apiPort, "file:save-as", {
+          filePath,
+        });
+        return response.text(`Document saved to: ${filePath}`);
+      }
+    } catch (error) {
+      console.error(error);
+      return response.error(
+        JsonRpcErrorCode.InternalError,
+        `Failed to save file to path: ${error instanceof Error ? error.message : String(error)}`
+      );
+    }
+  }
+);
+
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);

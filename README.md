@@ -11,13 +11,14 @@
 Muzika is a comprehensive music band and artist data management system designed to capture and analyze complex relationships in the music industry:
 
 - **Artist career paths**: Track artists moving between bands
-- **Temporal relationships**: When artists were in which bands  
+- **Temporal relationships**: When artists were in which bands
 - **Cross-band connections**: Find artists who played together
 - **Career timeline analysis**: Complete artist journey visualization
 
 ## Setup
 
 Prerequisite:
+
 - [Frame0](https://frame0.app/) `v1.0.0-beta.17` or higher.
 - [Node.js](https://nodejs.org/) `v22` or higher.
 
@@ -49,6 +50,7 @@ You can use `--api-port=<port>` optional parameter to use another port number fo
 ## Available Tools
 
 ### Basic Frame0 Tools
+
 - `create_frame`
 - `create_rectangle`
 - `create_ellipse`
@@ -79,8 +81,10 @@ You can use `--api-port=<port>` optional parameter to use another port number fo
 - `export_page_as_image`
 - `save_file`
 - `save_file_as`
+- `save_file_to_path`
 
 ### Music-Specific Tools (Coming Soon)
+
 - `create_music_dashboard`
 - `create_artist_timeline`
 - `create_band_relationship_diagram`
