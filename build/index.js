@@ -951,11 +951,21 @@ server.tool("save_file_as", "Save the current Frame0 document with a new filenam
         // Ensure the filename has .f0 extension
         const fileExtension = filename.endsWith('.f0') ? '' : '.f0';
         const fullFilename = filename + fileExtension;
-        // Use save-as with the filename (Frame0 will handle the path)
-        await command(apiPort, "file:save-as", {
-            filename: fullFilename,
-        });
-        return response.text(`Document saved as: muzika/wireframes/${fullFilename}`);
+        const targetPath = `muzika/wireframes/${fullFilename}`;
+        // Try different Frame0 commands that might support direct file path saving
+        try {
+            await command(apiPort, "file:save-to-path", {
+                filePath: targetPath,
+            });
+            return response.text(`Document saved to: ${targetPath}`);
+        }
+        catch (pathError) {
+            // Fallback to save-as with full path
+            await command(apiPort, "file:save-as", {
+                filePath: targetPath,
+            });
+            return response.text(`Document saved to: ${targetPath}`);
+        }
     }
     catch (error) {
         console.error(error);
